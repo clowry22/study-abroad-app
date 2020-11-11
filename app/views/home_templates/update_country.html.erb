@@ -1,0 +1,17 @@
+<h2>Where are you travelling to next? </h2>
+
+<form action="/">
+  <label for="get_country">Choose a country</label>
+    <select name="country" id="get_country">
+      <%@array_of_countries.each do |country|%>
+        <option value="<%=country.fetch("name")%>">
+          <%=country.fetch("name").downcase()%>
+          
+        </option>
+
+      <%end%> 
+   </select>
+
+   <button>Submit!</button>
+  </form>
+

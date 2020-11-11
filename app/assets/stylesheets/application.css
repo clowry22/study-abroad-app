@@ -12,3 +12,35 @@
  *
  *= require_self
  */
+
+ body {
+   padding-top: 70px;
+   padding-left: 20px;
+   font-family: 'Montserrat', sans-serif;
+ }
+
+ .from_country {
+   font-style: italic;
+ }
+
+ h2 {
+      padding-top: 40px;
+ }
+
+ h1 {
+      padding-top: 40px;
+      padding-bottom: 20px;
+ }
+
+ .language_list {
+   padding-bottom: 30px;
+ }
+
+ hr {
+   padding-bottom: 20px;
+ }
+
+ table {
+   text-align: center
+ }
+

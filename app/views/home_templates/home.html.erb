@@ -1,0 +1,15 @@
+<h1>Which country are you in? </h1>
+
+
+<ul>
+<%@array_of_countries.each do |country|%>
+      <li>
+         <a href="/<%=country.fetch("name").downcase()%>"> <%=country.fetch("name").downcase()%> </a>
+          
+  </li>
+
+<%end%> 
+
+</ul>
+
+

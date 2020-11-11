@@ -1,0 +1,53 @@
+<h2 class><%=@the_country.name.capitalize%>'s official languages are: </h2>
+
+<ul class="language_list">
+<%@array_of_languages.each do |lang|%>
+  <li><%=lang.fetch("name")%> </li>
+  <%end%>
+</ul>
+
+<hr>
+
+<h3>Phrases you learned </h3>
+
+<form action="/<%=@the_country%>/add_phrase">
+  <label for="new_phrase">Add new phrase </label>
+  <input id="new_phrase" name = "phrase" placeholder="Enter a phrase...">
+  <button>Learn!</button>
+</form>
+<br>
+
+<table class="table table-striped table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Original Language </th>
+      <th scope="col">Original Phrase</th>
+      <th scope="col">Translated Language </th>
+      <th scope="col">Translated Phrase</th>
+      <th scope="col">Tag</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <!--make an each loop -->
+  <tr>
+    <th scope="row">1 </th>
+    <td>English</td>
+    <td>How are you? </td>
+    <td>Spanish </td>
+    <td>Que tal </td>
+    <td>Greeting </td>
+  </tr>
+  <tr>
+    <th scope="row">1 </th>
+    <td>English</td>
+    <td>Good day </td>
+    <td>French </td>
+    <td>Bon jour </td>
+    <td>Greeting </td>
+  </tr>
+  </tbody>
+
+
+</table>

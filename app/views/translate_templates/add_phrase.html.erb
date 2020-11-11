@@ -1,0 +1,28 @@
+<h2>Learn a new phrase! </h2>
+<%require "google/cloud/translate" %>
+<% gt_client = Google::Cloud::Translate.new({ :version => :v2 }) %>
+<%@languages = gt_client.languages("en")%>
+
+<form action="/:country/add_phrase_results">
+  <label for="phrase1"> Translate </label>
+  <input id="phrase1" name="phrase" value = "<%=@the_phrase%>">
+    into 
+
+  <label for="translate_language"></label>
+    <select name="lang" id="translate_language">
+      <%@languages.each do |lang|%>
+        <option value="<%=lang.code%>">
+          <%=lang.name%>
+          
+        </option>
+
+      <%end%> 
+   </select>
+
+   <button>Learn!</button>
+  </form>
+
+
+
+
+
