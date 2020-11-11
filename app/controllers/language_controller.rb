@@ -13,6 +13,8 @@ class LanguageController < ApplicationController
 
   def add_phrase_form
     @country = params.fetch("country")
+    @the_country = Country.new
+    @the_country.name = @country
     @the_phrase = params.fetch("phrase")
     render({ :template => "translate_templates/add_phrase.html.erb"})
   end

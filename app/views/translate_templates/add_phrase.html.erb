@@ -3,7 +3,7 @@
 <% gt_client = Google::Cloud::Translate.new({ :version => :v2 }) %>
 <%@languages = gt_client.languages("en")%>
 
-<form action="/:country/add_phrase_results">
+<form action="/<%=@the_country.name%>/add_phrase_results">
   <label for="phrase1"> Translate </label>
   <input id="phrase1" name="phrase" value = "<%=@the_phrase%>">
     into 

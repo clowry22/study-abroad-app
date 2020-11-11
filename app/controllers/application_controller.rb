@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     @raw_data = open(@url).read
     @parsed_data = JSON.parse(@raw_data)
     @array_of_countries = @parsed_data
-    render({ :template => "home_templates/update_country.html.erb"})
+    render({ :template => "home_templates/home.html.erb"})
   end
 
   def my_countries

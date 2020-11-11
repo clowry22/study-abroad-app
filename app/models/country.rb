@@ -1,10 +1,12 @@
-class Country
-  attr_accessor :name
-  attr_accessor :capital
-  attr_accessor :region
-  attr_accessor :subregion
-  attr_accessor :population
-  attr_accessor :languages
-  attr_accessor :currencies
-
+# == Schema Information
+#
+# Table name: countries
+#
+#  id           :integer          not null, primary key
+#  last_visited :date
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+class Country < ApplicationRecord
 end
