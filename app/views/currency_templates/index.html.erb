@@ -1,15 +1,28 @@
 <!-- The default currency is going to be US dollars -->
 
-<h2>The acceptable currencies at (country) are: </h2>
+<h2>The acceptable currencies in <%=@the_country.name%> are: </h2>
+
+
 <ul>
-  <li>Currency 1 </li>
-  <li>Currency 2</li>
+  <%@array_of_symbols.each do |curr|%>
+    <li><%=curr.fetch("code") %></li>
+    <%url = "https://api.exchangerate.host/convert?from=USD&to=" + curr.fetch("code")%>
+    <%@exchange_data = open(url).read%>
+    <%@parsed_exchange_data = JSON.parse(@exchange_data)%>
+    <%@exchange_info = @parsed_exchange_data.fetch("info")%>
+    <%@exchange_rate= @exchange_info.fetch("rate")%>
+
+
+   1 USD = <%=@exchange_rate%> 
+    <%=curr.fetch("code")%>
+
+  <%end%>
 </ul>
 
 <br>
 
-<h4>1 <%=@usd%> = (exchange rate) (currency 1)</h4>
-<h4> __ <%=@usd%> = (exchange rate x ___) (currency 1) </h4>
+<h4>1 USD = (exchange rate) (currency 1)</h4>
+<h4> __ USD = (exchange rate x ___) (currency 1) </h4>
 
-<h4>1 <%=@usd%> = (exchange rate) (currency 2)</h4>
-<h4> __ <%=@usd%> = (exchange rate x ___) (currency 2) </h4>
+<h4>1 USD = (exchange rate) (currency 2)</h4>
+<h4> __ USD = (exchange rate x ___) (currency 2) </h4>

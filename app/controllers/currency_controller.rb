@@ -1,11 +1,14 @@
 class CurrencyController < ApplicationController
   def index
-    @raw_data = open("https://api.exchangerate.host/symbols").read
-    @parsed_data = JSON.parse(@raw_data)
-    @symbols_hash = @parsed_data.fetch("symbols")
-    @array_of_symbols = @symbols_hash.keys
+    @country = params.fetch("country")
+    @the_country = Country.new
+    @the_country.name = @country
+    @the_country.save
 
-    @usd = @array_of_symbols.at(-21)
+    @url = "https://restcountries.eu/rest/v2/name/" + @the_country.name.downcase
+    @raw_country_data = open(@url).read
+    @parsed_country_data = JSON.parse(@raw_country_data)
+    @array_of_symbols = @parsed_country_data.at(0).fetch("currencies")
     render({ :template => "currency_templates/index.html.erb"})
 
     # @from_symbol = params.fetch("from_currency")
