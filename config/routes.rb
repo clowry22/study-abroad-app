@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   
   #home page, you indicate which country you're going to and the computer figures out the currency for you. Makes it easier for the user. 
   get("/", { :controller => "application", :action => "home"})
-
+  get("/home", { :controller => "application", :action => "index"})
   #signed-in home page with country pre-loaded
   #get("/:country", { :controller => "application", :action => "index"})
-  get("/:country", { :controller => "application", :action => "index"})
+  get("/home/:country", { :controller => "application", :action => "index"})
 
 
   #let's start with the currency exchange tab first

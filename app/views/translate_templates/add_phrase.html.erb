@@ -1,3 +1,13 @@
+<h2 class><%=@the_country.name.capitalize%>'s official languages are: </h2>
+
+<ul class="language_list">
+<%@array_of_languages.each do |lang|%>
+  <li><%=lang.fetch("name")%> </li>
+  <%end%>
+</ul>
+
+<hr>
+
 <h2>Learn a new phrase! </h2>
 <%require "google/cloud/translate" %>
 <% gt_client = Google::Cloud::Translate.new({ :version => :v2 }) %>

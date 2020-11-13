@@ -1,4 +1,4 @@
-<h1>Translation </h1>
+<h1>Translation of "<%=@the_phrase%>" </h1>
 
 <%require "google/cloud/translate" %>
 <% gt_client = Google::Cloud::Translate.new({ :version => :v2 }) %>
@@ -10,5 +10,5 @@
 </div>
 
 <div>
-  <a href="/:country/translate">Translate something else</a>
+  <a href="/<%=@the_country%>/translate">Translate</a>
 </div>
