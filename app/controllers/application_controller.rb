@@ -18,11 +18,13 @@ class ApplicationController < ActionController::Base
   end
 
   def update_country
-    @url = "https://restcountries.eu/rest/v2/all"
-    @raw_data = open(@url).read
-    @parsed_data = JSON.parse(@raw_data)
-    @array_of_countries = @parsed_data
-    render({ :template => "home_templates/update_country.html.erb"})
+    #@url = "https://restcountries.eu/rest/v2/all"
+    #@raw_data = open(@url).read
+    #@parsed_data = JSON.parse(@raw_data)
+    #@array_of_countries = @parsed_data
+    #render({ :template => "home_templates/update_country.html.erb"})
+    the_country = params.fetch("country").downcase()
+    redirect_to("/home/#{the_country}")
   end
 
   def my_countries

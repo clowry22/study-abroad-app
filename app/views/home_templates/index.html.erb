@@ -8,3 +8,27 @@
   <li><a href="/<%=@the_country.name.downcase()%>/translate">Translate </a></li>
   <li><a href="/<%=@the_country.name.downcase()%>/currency_exchange">Currency Exchange </a></li>
 </ul>
+
+<br>
+<h3>Update Country </h3>
+
+<%@selected_country = nil%>
+<%@url = "https://restcountries.eu/rest/v2/all"%>
+<%@raw_data = open(@url).read %>
+<%@parsed_data = JSON.parse(@raw_data)%>
+<%@array_of_countries = @parsed_data %>
+
+<form action="/update_country">
+  <label for="get_country">Choose a country</label>
+    <select name="country" id="get_country">
+      <%@array_of_countries.each do |country|%>
+        <option value="<%=country.fetch("name")%>">
+          <%=country.fetch("name").downcase()%>
+          <%@selected_country = country.fetch("name").downcase()%>
+        </option>
+
+      <%end%> 
+   </select>
+
+   <button>Submit!</button>
+  </form>
