@@ -3,10 +3,13 @@ class LanguageController < ApplicationController
     @country = params.fetch("country")
     @the_country = Country.new
     @the_country.name = @country
+    @the_country.name = @the_country.name.gsub(" ", "%20")
     url = "https://restcountries.eu/rest/v2/name/" + @the_country.name.downcase()
     @raw_data = open(url).read
     @parsed_data = JSON.parse(@raw_data)
     @array_of_languages = @parsed_data.at(0).fetch("languages")
+
+    @the_country.name = @the_country.name.gsub("%20", " ")
     render({ :template => "translate_templates/index.html.erb"})
   end
 
