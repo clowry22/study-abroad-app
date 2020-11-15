@@ -1,7 +1,6 @@
 class LanguageController < ApplicationController
   def index 
-    @country = params.fetch("country")
-     
+    @country = params.fetch("country").capitalize
     @matching_countries = Country.where({ :name => @country})
     @the_country = @matching_countries.at(0)
 

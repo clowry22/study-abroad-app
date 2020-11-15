@@ -12,7 +12,7 @@
 #  updated_at          :datetime         not null
 #
 class Phrase < ApplicationRecord
-  validates(:original_phrase && :original_language && :translated_language && :translated_phrase,
+  validates(:original_phrase && :original_language && :translated_language && :translated_phrase && :country,
     {
       :presence => true,
       :uniqueness => { :case_sensitive => false }
