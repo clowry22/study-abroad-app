@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get("/new_user_record", {:controller => "application", :action => "create_user" })
   get("/log_out", { :controller => "application", :action => "delete_cookies"})
 
-  get("/sign_in", { :controller => "application", :action => "new_session_form"})
+  get("/sign_in", { :controller => "application", :action => "signin_form"})
   post("/verify_credentials", { :controller => "application", :action => "authenticate"})
 
 

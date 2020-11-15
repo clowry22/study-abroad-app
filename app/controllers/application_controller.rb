@@ -1,5 +1,27 @@
 class ApplicationController < ActionController::Base
   #users
+  def authenticate
+    un = params.fetch("input_username")
+    pw = params.fetch("input_password")
+
+    user = User.where({ :username => un}).at(0)
+    
+    if user == nil     
+      redirect_to("/sign_in", {:alert => "No one by these name 'round these parts"})
+    else
+    
+      if user.authenticate(pw)
+        session.store(:user_name, user.username)
+        redirect_to("/", {:notice => "Welcome back, " + user.username + "!"})
+      else
+        redirect_to("/sign_in", {:alert => "Nice try, stranger!"})
+      end
+
+    end
+
+
+  end
+
   def new_signup_form
     render({ :template => "home_templates/signupform.html.erb"})
   end
@@ -21,10 +43,14 @@ class ApplicationController < ActionController::Base
   
   end
 
-    def delete_cookies
+  def delete_cookies
     reset_session
 
     redirect_to("/", {:notice => "See ya later!"})
+  end
+
+  def signin_form
+    render({ :template => "home_templates/signinform.html.erb"})
   end
 
   #home pages
@@ -33,7 +59,7 @@ class ApplicationController < ActionController::Base
     @country = params.fetch("country")
     @the_country = Country.new
     @the_country.name = @country
-
+    cookies.store(:most_recent_country, @country)
     render({ :template => "home_templates/index.html.erb"})
   end
 
