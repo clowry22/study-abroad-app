@@ -1,0 +1,27 @@
+<h1><%=@the_country.name%></h1>
+
+<ul class="list-unstyled">
+  <li>Capital</li>
+  <p style="margin-left: 20px;"><%=@the_country.capital%></p>
+
+  <li>Subregion/Region</li>
+  <p style="margin-left: 20px;"><%=@the_country.subregion%>/<%=@the_country.region%></p>
+
+  <li>Population</li>
+  <p style="margin-left: 20px;"><%=@the_country.population%></p>
+
+  <li>Languages</li>
+  <%@the_country.languages.each do |lang|%>
+    <p style="margin-left: 20px;"><%=lang.fetch("name")%></p>
+  <%end%>
+
+  <li>Currencies</li>
+  <%@the_country.currencies.each do |curr|%>
+    <p style="margin-left: 20px;"><%=curr.fetch("code")%></p>
+  <%end%>
+
+</ul>
+
+
+<a href="/my_countries">Go back </a>
+<hr>

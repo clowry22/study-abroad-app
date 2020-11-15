@@ -18,4 +18,11 @@
 class Country < ApplicationRecord
   serialize :languages, Array 
   serialize :currencies, Array 
+
+    validates(:name,
+    {
+      :presence => true,
+      :uniqueness => { :case_sensitive => false }
+    }
+  )
 end

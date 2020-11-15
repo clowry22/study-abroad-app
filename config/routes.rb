@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   #signed-in home page with country pre-loaded
   #get("/:country", { :controller => "application", :action => "index"})
   get("/home/:country", { :controller => "application", :action => "index"})
-
+  get("/home/:country/info", { :controller => "application", :action => "get_country_details"})
 
   #let's start with the currency exchange tab first
   get("/:country/currency_exchange", { :controller => "currency", :action => "index"})

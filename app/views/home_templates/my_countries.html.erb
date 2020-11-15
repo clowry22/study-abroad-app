@@ -13,6 +13,14 @@
 
 
   <tbody>
+  <%Country.all.each do |country|%>
+    <tr>
+      <td><%=country.country_code%></td>
+      <td><%=country.name%> </td>
+      <td><%=country.created_at%></td>
+      <td><a href="home/<%=country.name%>/info">Show details <a></td>
+    <tr>
+  <%end%>
 
   </tbody>
 
