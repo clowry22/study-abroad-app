@@ -4,7 +4,7 @@
 
 
 <ul>
-  <%@array_of_symbols.each do |curr|%>
+  <%@the_country.currencies.each do |curr|%>
     <li><%=curr.fetch("code") %></li>
     <%url = "https://api.exchangerate.host/convert?from=USD&to=" + curr.fetch("code")%>
     <%@exchange_data = open(url).read%>

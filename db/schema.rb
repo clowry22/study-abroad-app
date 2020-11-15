@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_020049) do
+ActiveRecord::Schema.define(version: 2020_11_15_031128) do
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.date "last_visited"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "country_code"
+    t.string "capital"
+    t.string "region"
+    t.string "subregion"
+    t.integer "population"
+    t.string "languages"
+    t.string "currencies"
   end
 
   create_table "users", force: :cascade do |t|

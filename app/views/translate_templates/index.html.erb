@@ -1,7 +1,7 @@
 <h2 class><%=@the_country.name.capitalize%>'s official languages are: </h2>
 
 <ul class="language_list">
-<%@array_of_languages.each do |lang|%>
+<%@the_country.languages.each do |lang|%>
   <li><%=lang.fetch("name")%> </li>
   <%end%>
 </ul>

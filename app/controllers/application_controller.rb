@@ -7,12 +7,14 @@ class ApplicationController < ActionController::Base
     user = User.where({ :username => un}).at(0)
     
     if user == nil     
-      redirect_to("/sign_in", {:alert => "No one by these name 'round these parts"})
+      redirect_to("/sign_in", {:alert => "User not recognized"})
     else
     
       if user.authenticate(pw)
         session.store(:user_name, user.username)
-        redirect_to("/", {:notice => "Welcome back, " + user.username + "!"})
+        current_country = cookies.fetch(:most_recent_country) #figure out how to make this variable unique to each user. session.store/session.fetch clears out most_recent_country whenever I log out
+        next_url = "/home/" + current_country.to_s
+        redirect_to(next_url)
       else
         redirect_to("/sign_in", {:alert => "Nice try, stranger!"})
       end
@@ -36,7 +38,7 @@ class ApplicationController < ActionController::Base
 
     if save_status == true
       session.store( :user_name, user.username)
-      redirect_to("/", {:notice => "Welcome, " + user.username + "!"})
+      redirect_to("/", {:notice => "Hello, " + user.username + "!"})
     else  
       redirect_to("/sign_up", { :alert => user.errors.full_messages.to_sentence})
     end
@@ -46,7 +48,7 @@ class ApplicationController < ActionController::Base
   def delete_cookies
     reset_session
 
-    redirect_to("/", {:notice => "See ya later!"})
+    redirect_to("/", {:notice => "See you soon!"})
   end
 
   def signin_form
@@ -57,10 +59,36 @@ class ApplicationController < ActionController::Base
   def index
     #@country = params.fetch("country").downcase()
     @country = params.fetch("country")
-    @the_country = Country.new
-    @the_country.name = @country
-    cookies.store(:most_recent_country, @country)
-    render({ :template => "home_templates/index.html.erb"})
+
+    
+    if @country != nil  
+      if Country.where({ :name => @country}).present?
+        matching_countries = Country.where({ :name => @country})
+        @the_country = matching_countries.at(0)
+      else 
+        @the_country = Country.new
+        @the_country.name = @country
+        @the_country.save 
+      end 
+
+      @the_country.name = @the_country.name.gsub(" ", "%20")
+      url = "https://restcountries.eu/rest/v2/name/" + @the_country.name.downcase()
+      @raw_data = open(url).read
+      @parsed_data = JSON.parse(@raw_data)
+
+      @the_country.capital = @parsed_data.at(0).fetch("capital") 
+      @the_country.languages = @parsed_data.at(0).fetch("languages")
+      @the_country.region = @parsed_data.at(0).fetch("region")
+      @the_country.subregion = @parsed_data.at(0).fetch("subregion")
+      @the_country.country_code = @parsed_data.at(0).fetch("alpha2Code")
+      @the_country.currencies = @parsed_data.at(0).fetch("currencies")
+      @the_country.population = @parsed_data.at(0).fetch("population")
+
+      cookies.store(:most_recent_country, @country)
+      render({ :template => "home_templates/index.html.erb"})
+    else
+      redirect_to("/")
+    end
   end
 
  def home
@@ -79,6 +107,7 @@ class ApplicationController < ActionController::Base
     #@array_of_countries = @parsed_data
     #render({ :template => "home_templates/update_country.html.erb"})
     the_country = params.fetch("country").downcase()
+    session.store(:most_recent_country, @country)
     redirect_to("/home/#{the_country}")
   end
 
