@@ -12,15 +12,6 @@ class CurrencyController < ApplicationController
     @array_of_symbols = @parsed_country_data.at(0).fetch("currencies")
     @the_country.name = @the_country.name.gsub("%20", " ")
     render({ :template => "currency_templates/index.html.erb"})
-
-    # @from_symbol = params.fetch("from_currency")
-    # @to_symbol = params.fetch("to_currency")
-
-    # url = "https://api.exchangerate.host/convert?from=" + @from_symbol + "&to=" + @to_symbol
-    # @exchange_data = open(url).read
-    # @parsed_exchange_data = JSON.parse(@exchange_data)
-    # @exchange_info = @parsed_exchange_data.fetch("info")
-    # @exchange_rate= @exchange_info.fetch("rate")
   end
 
   
