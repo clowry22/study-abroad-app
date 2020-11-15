@@ -15,11 +15,14 @@
 
 <form action="/<%=@the_country.name%>/add_phrase_results">
   <label for="phrase1"> Translate </label>
-  <input id="phrase1" name="phrase" value = "<%=@the_phrase%>">
+  <input id="phrase1" name="origin_phrase" value = "<%=@input_phrase%>">
+    from
+  <label for="lang1"> Translate </label>
+  <input id="lang1" name="old_language" value = "<%=@input_original_language%>">
     into 
 
   <label for="translate_language"></label>
-    <select name="lang" id="translate_language">
+    <select name="new_lang" id="translate_language">
       <%@languages.each do |lang|%>
         <option value="<%=lang.code%>">
           <%=lang.name%>

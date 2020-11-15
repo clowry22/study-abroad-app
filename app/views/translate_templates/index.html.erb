@@ -11,9 +11,24 @@
 
 <h3>Phrases you learned </h3>
 
+<%require "google/cloud/translate" %>
+<% gt_client = Google::Cloud::Translate.new({ :version => :v2 }) %>
+<%@languages = gt_client.languages("en")%>
+
 <form action="/<%=@the_country.name%>/add_phrase">
-  <label for="new_phrase">Add new phrase </label>
-  <input id="new_phrase" name = "phrase" placeholder="Enter a phrase...">
+  <label for="old_phrase">Add new phrase </label>
+  <input id="old_phrase" name = "phrase" placeholder="Enter a phrase...">
+
+  <label for="new_phrase">Language </label>
+  <select name="old_language" id="new_phrase">
+    <%@languages.each do |lang|%>
+        <option value="<%=lang.code%>">
+          <%=lang.name%>
+          
+        </option>
+
+      <%end%> 
+  </select>
   <button>Learn!</button>
 </form>
 <br>
@@ -26,28 +41,24 @@
       <th scope="col">Original Phrase</th>
       <th scope="col">Translated Language </th>
       <th scope="col">Translated Phrase</th>
-      <th scope="col">Tag</th>
     </tr>
   </thead>
 
   <tbody>
   <!--make an each loop -->
-  <tr>
-    <th scope="row">1 </th>
-    <td>English</td>
-    <td>How are you? </td>
-    <td>Spanish </td>
-    <td>Que tal </td>
-    <td>Greeting </td>
-  </tr>
-  <tr>
-    <th scope="row">1 </th>
-    <td>English</td>
-    <td>Good day </td>
-    <td>French </td>
-    <td>Bon jour </td>
-    <td>Greeting </td>
-  </tr>
+  <!--show the records where country == @the_country.name -->
+  <%Phrase.all.each do |phrase|%>
+    <tr>
+      <th scope="row"><%=phrase.id%></th>
+      <td><%=phrase.original_language%> </td>
+      <td><%=phrase.original_phrase%></td>
+      <td><%=phrase.translated_language%> </td>
+      <td><%=phrase.translated_phrase%></td>
+      
+    <tr>
+  <%end%>
+
+  </tbody>
   </tbody>
 
 

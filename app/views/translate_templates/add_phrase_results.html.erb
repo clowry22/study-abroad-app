@@ -1,13 +1,23 @@
-<h1>Translation of "<%=@the_phrase%>" </h1>
+<h1>Translation of "<%=@input_phrase%>" </h1>
 
 <%require "google/cloud/translate" %>
 <% gt_client = Google::Cloud::Translate.new({ :version => :v2 }) %>
 
-<%@translation = gt_client.translate(@the_phrase, { :to => @language})%>
+<%@translation = gt_client.translate(@input_phrase, { :to => @new_language})%>
 
 <div>
   <%=@translation%>
 </div>
+
+    <%if @input_phrase != nil  %>
+      
+        <%@the_phrase = Phrase.new%>
+        <%@the_phrase.original_phrase = @input_phrase%>
+        <%@the_phrase.original_language = @original_language%>
+        <%@the_phrase.translated_phrase = @translation%>
+        <%@the_phrase.translated_language = @new_language%>
+        <%@the_phrase.save %>
+    <%end %>
 
 <div>
   <a href="/<%=@the_country%>/translate">Translate</a>

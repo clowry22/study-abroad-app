@@ -1,56 +1,48 @@
 class LanguageController < ApplicationController
   def index 
     @country = params.fetch("country")
-    
-    if @country != nil  
-      if Country.where({ :name => @country}).present?
-        matching_countries = Country.where({ :name => @country})
-        @the_country = matching_countries.at(0)
-      else 
-        @the_country = Country.new
-        @the_country.name = @country.capitalize
-        @the_country.name = @the_country.name.gsub(" ", "%20")
-        @the_country.name = @the_country.name.gsub("Å", "A")
-        url = "https://restcountries.eu/rest/v2/name/" + @the_country.name.downcase()
-        @raw_data = open(url).read
-        @parsed_data = JSON.parse(@raw_data)
+     
+    @matching_countries = Country.where({ :name => @country})
+    @the_country = @matching_countries.at(0)
 
-        @the_country.name = @the_country.name.capitalize.gsub("%20", " ")
-        @the_country.capital = @parsed_data.at(0).fetch("capital") 
-        @the_country.languages = @parsed_data.at(0).fetch("languages")
-        @the_country.region = @parsed_data.at(0).fetch("region")
-        @the_country.subregion = @parsed_data.at(0).fetch("subregion")
-        @the_country.country_code = @parsed_data.at(0).fetch("alpha2Code")
-        @the_country.currencies = @parsed_data.at(0).fetch("currencies")
-        @the_country.population = @parsed_data.at(0).fetch("population")
-        @the_country.save 
-      end 
-
-      cookies.store(:most_recent_country, @country)
-      render({ :template => "translate_templates/index.html.erb"})
-    else
-      redirect_to("/")
-    end
-
+    cookies.store(:most_recent_country, @country)
+    render({ :template => "translate_templates/index.html.erb"})
   end
 
   def add_phrase_form
-    @country = params.fetch("country")
-    @the_country = Country.new
-    @the_country.name = @country
-    @the_phrase = params.fetch("phrase")
-    url = "https://restcountries.eu/rest/v2/name/" + @the_country.name.downcase()
-    @raw_data = open(url).read
-    @parsed_data = JSON.parse(@raw_data)
-    @array_of_languages = @parsed_data.at(0).fetch("languages")
+    @country = params.fetch("country").capitalize
+    @matching_countries = Country.where({ :name => @country})
+    @the_country = @matching_countries.first
+    @input_phrase = params.fetch("phrase")
+    @input_original_language = params.fetch("old_language")
+
+
+    # if @input_phrase != nil  
+    #   if Phrase.where({ :original_phrase => @input_phrase}).present?
+    #     matching_phrases = Phrase.where({ :original_phrase => @input_phrase})
+    #     @the_phrase = matching_phrases.at(0)
+    #   else 
+    #     @the_phrase = Phrase.new
+    #     @the_phrase.original_phrase = @input_phrase
+    #     @the_phrase.original_language = @input_original_language
+    #     @the_phrase.save 
+    #   end 
+
+      cookies.store(:most_recent_country, @country)
+      @array_of_languages = @the_country.languages
     render({ :template => "translate_templates/add_phrase.html.erb"})
+    # else
+    #   next_url = "/home/" + @the_country.to_s + "/translate"
+    #   redirect_to(next_url)
+    # end
+    
   end
 
   def add_phrase_results
+    @input_phrase = params.fetch("origin_phrase")
+    @new_language = params.fetch("new_lang")
+    @original_language = params.fetch("old_language")
     @the_country = params.fetch("country")
-    @the_phrase = params.fetch("phrase")
-    @language = params.fetch("lang")
-    
     render({ :template => "translate_templates/add_phrase_results.html.erb"})
   end
 end

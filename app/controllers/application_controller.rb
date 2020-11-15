@@ -57,7 +57,6 @@ class ApplicationController < ActionController::Base
 
   #home pages
   def index
-    #@country = params.fetch("country").downcase()
     @country = params.fetch("country")
 
     
