@@ -12,7 +12,7 @@
 <h3>Phrases you learned </h3>
 
 <%require "google/cloud/translate" %>
-<% gt_client = Google::Cloud::Translate.new({ :version => :v2 }) %>
+<% gt_client = Google::Cloud::Translate.new({ :version => :v2 })%>
 <%@languages = gt_client.languages("en")%>
 
 <form action="/<%=@the_country.name%>/add_phrase">

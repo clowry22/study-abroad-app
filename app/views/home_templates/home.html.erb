@@ -1,15 +1,20 @@
-<h1>Which country are you in? </h1>
+<%if session.fetch(:most_recent_country) == nil%>
+  <h1>Which country are you in? </h1>
 
 
-<ul>
-<%@array_of_countries.each do |country|%>
-      <li>
-         <a href="/home/<%=country.fetch("name").downcase()%>"> <%=country.fetch("name").downcase()%> </a>
-          
-  </li>
+  <ul>
+  <%@array_of_countries.each do |country|%>
+        <li>
+          <a href="/home/<%=country.fetch("name").downcase()%>"> <%=country.fetch("name").downcase()%> </a>
+            
+    </li>
 
-<%end%> 
+  <%end%> 
 
-</ul>
+  </ul>
 
+<% else %>
+  <%redirect_to("/home/:country")%>
+
+<%end%>
 

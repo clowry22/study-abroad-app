@@ -45,14 +45,8 @@
         </ul>
 
         <ul class="navbar-nav">
-
-          <li class="nav-item">
-            <a class="nav-link active" href="/my_countries">
-              My Countries
-            </a>
-          </li>
-
-          <li class="nav-item">
+          <%if session[:user_name] == nil%>
+            <li class="nav-item">
             <a class="nav-link active" href="/sign_up">
               Sign Up
             </a>
@@ -63,24 +57,37 @@
               Sign In
             </a>
           </li>
-
+        
+        <% else%>
+          <li class="nav-item">
+            <a class="nav-link active" href="/my_countries">
+              My Countries
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link active" href="/log_out">
               Log Out
             </a>
           </li>
+        <%end%>
+
+          
+
+          
+
+          
         </ul>
       </div>
   </nav>
 
   <%if notice.present?%>
-    <div style="border: thin green solid; color: green;">
+    <div style="color: green;">
       <%=notice%>
     </div>
   <%end%>
 
   <%if alert.present?%>
-    <div style="border: thin red solid; color: red;">
+    <div style="color: red;">
       <%=alert%>
     </div>  
   <%end%>
