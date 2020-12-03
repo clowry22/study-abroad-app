@@ -25,3 +25,34 @@
 
 <a href="/my_countries">Go back </a>
 <hr>
+
+<table class="table table-striped table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Original Language </th>
+      <th scope="col">Original Phrase</th>
+      <th scope="col">Translated Language </th>
+      <th scope="col">Translated Phrase</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <!--make an each loop -->
+  <!--show the records where country == @the_country.name -->
+  <%Phrase.where({:country => @the_country.name}).each do |phrase|%>
+    <tr>
+      <th scope="row"><%=phrase.id%></th>
+      <td><%=phrase.original_language%> </td>
+      <td><%=phrase.original_phrase%></td>
+      <td><%=phrase.translated_language%> </td>
+      <td><%=phrase.translated_phrase%></td>
+      
+    <tr>
+  <%end%>
+
+  </tbody>
+  </tbody>
+
+
+</table>

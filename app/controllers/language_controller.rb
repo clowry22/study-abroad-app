@@ -27,7 +27,7 @@ class LanguageController < ApplicationController
     #     @the_phrase.save 
     #   end 
 
-      cookies.store(:most_recent_country, @country)
+      session.store(:most_recent_country, @country)
       @array_of_languages = @the_country.languages
     render({ :template => "translate_templates/add_phrase.html.erb"})
     # else

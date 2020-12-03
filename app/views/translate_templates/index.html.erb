@@ -19,7 +19,7 @@
   <label for="old_phrase">Add new phrase </label>
   <input id="old_phrase" name = "phrase" placeholder="Enter a phrase...">
 
-  <label for="new_phrase">Language </label>
+  <label for="new_phrase">Original Language </label>
   <select name="old_language" id="new_phrase">
     <%@languages.each do |lang|%>
         <option value="<%=lang.code%>">
@@ -47,7 +47,7 @@
   <tbody>
   <!--make an each loop -->
   <!--show the records where country == @the_country.name -->
-  <%Phrase.all.each do |phrase|%>
+  <%Phrase.where({:country => @the_country.name}).each do |phrase|%>
     <tr>
       <th scope="row"><%=phrase.id%></th>
       <td><%=phrase.original_language%> </td>
