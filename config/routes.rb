@@ -23,11 +23,11 @@ Rails.application.routes.draw do
     get("/:country/add_phrase_results", { :controller => "language", :action => "add_phrase_results"})
 
   #users info
-  get("/sign_up", { :controller => "user_authentication", :action => "new_signup_form"})
+  get("/user_sign_up", { :controller => "user_authentication", :action => "new_signup_form"})
   get("/new_user_record", {:controller => "user_authentication", :action => "create_user" })
   get("/log_out", { :controller => "user_authentication", :action => "delete_cookies"})
 
-  get("/sign_in", { :controller => "user_authentication", :action => "signin_form"})
+  get("/user_sign_in", { :controller => "user_authentication", :action => "signin_form"})
   post("/verify_credentials", { :controller => "user_authentication", :action => "authenticate"})
 
 

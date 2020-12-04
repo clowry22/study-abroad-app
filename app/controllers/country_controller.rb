@@ -2,7 +2,6 @@ class CountryController < ApplicationController
     #home pages
   def index
     @country = params.fetch("country")
-
     
     if @country != nil  
       if Country.where({ :name => @country}).present?
@@ -26,8 +25,8 @@ class CountryController < ApplicationController
         @the_country.currencies = @parsed_data.at(0).fetch("currencies")
         @the_country.population = @parsed_data.at(0).fetch("population")
         @the_country.save 
+        
       end 
-
       cookies.store(:most_recent_country, @country)
       render({ :template => "home_templates/index.html.erb"})
     else
@@ -45,11 +44,6 @@ class CountryController < ApplicationController
   end
 
   def update_country
-    #@url = "https://restcountries.eu/rest/v2/all"
-    #@raw_data = open(@url).read
-    #@parsed_data = JSON.parse(@raw_data)
-    #@array_of_countries = @parsed_data
-    #render({ :template => "home_templates/update_country.html.erb"})
     the_country = params.fetch("country").downcase()
     session.store(:most_recent_country, @country)
     redirect_to("/home/#{the_country}")

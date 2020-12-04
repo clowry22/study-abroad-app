@@ -15,25 +15,9 @@ class LanguageController < ApplicationController
     @input_phrase = params.fetch("phrase")
     @input_original_language = params.fetch("old_language")
 
-
-    # if @input_phrase != nil  
-    #   if Phrase.where({ :original_phrase => @input_phrase}).present?
-    #     matching_phrases = Phrase.where({ :original_phrase => @input_phrase})
-    #     @the_phrase = matching_phrases.at(0)
-    #   else 
-    #     @the_phrase = Phrase.new
-    #     @the_phrase.original_phrase = @input_phrase
-    #     @the_phrase.original_language = @input_original_language
-    #     @the_phrase.save 
-    #   end 
-
-      session.store(:most_recent_country, @country)
-      @array_of_languages = @the_country.languages
+    cookies.store(:most_recent_country, @country)
+    @array_of_languages = @the_country.languages
     render({ :template => "translate_templates/add_phrase.html.erb"})
-    # else
-    #   next_url = "/home/" + @the_country.to_s + "/translate"
-    #   redirect_to(next_url)
-    # end
     
   end
 

@@ -1,4 +1,7 @@
 class UserAuthenticationController < ApplicationController
+  before_action(:force_user_sign_in)
+  skip_before_action( :force_user_sign_in, { :only => [ :new_signup_form, :create_user, :signin_form, 
+  :create_cookie, :delete_cookies, :authenticate]})
   #users
   def authenticate
     un = params.fetch("input_username")
@@ -7,20 +10,23 @@ class UserAuthenticationController < ApplicationController
     user = User.where({ :username => un}).at(0)
     
     if user == nil     
-      redirect_to("/sign_in", {:alert => "User not recognized"})
+      redirect_to("/user_sign_in", {:alert => "User not recognized"})
     else
     
       if user.authenticate(pw)
         session.store(:user_name, user.username)
-        current_country = cookies.fetch(:most_recent_country) #figure out how to make this variable unique to each user. session.store/session.fetch clears out most_recent_country whenever I log out
-        next_url = "/home/" + current_country.to_s
-        redirect_to(next_url)
+        current_country = cookies.fetch(:most_recent_country) 
+        if current_country == nil 
+          redirect_to("/")
+        else
+          next_url = "/home/" + current_country.to_s
+          redirect_to(next_url)
+        end
       else
-        redirect_to("/sign_in", {:alert => "Nice try, stranger!"})
+        redirect_to("/user_sign_in", {:alert => "Nice try, stranger!"})
       end
 
     end
-
 
   end
 
@@ -68,7 +74,7 @@ class UserAuthenticationController < ApplicationController
   def delete_cookies
     reset_session
 
-    redirect_to("/sign_in", {:notice => "See you soon!"})
+    redirect_to("/user_sign_in", {:notice => "See you soon!"})
   end
 
   def signin_form

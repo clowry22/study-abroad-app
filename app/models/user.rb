@@ -3,13 +3,14 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  county_count    :integer
+#  countries       :string
 #  password_digest :string
 #  username        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
+  serialize :countries, Array 
   validates(:username,
     {
       :presence => true,
@@ -17,5 +18,13 @@ class User < ApplicationRecord
     }
   )
 
+  validates(:countries,
+    {
+      :presence => true,
+      :uniqueness => { :case_sensitive => false }
+    }
+  )
+
     has_secure_password
+
 end

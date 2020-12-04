@@ -33,7 +33,7 @@
 
   <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
-      <a class="navbar-brand" href="/home/<%=cookies.fetch(:most_recent_country)%>"> <!-Learn how to use cookies to I can save the most recent country visited! ->
+      <a class="navbar-brand" href="/home/<%=cookies.fetch(:most_recent_country)%>"> 
         <span class="h2 font-weight-bold">Welcome <%=session.fetch(:user_name)%>!</span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,13 +47,13 @@
         <ul class="navbar-nav">
           <%if session[:user_name] == nil%>
             <li class="nav-item">
-            <a class="nav-link active" href="/sign_up">
+            <a class="nav-link active" href="/user_sign_up">
               Sign Up
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" href="/sign_in">
+            <a class="nav-link active" href="/user_sign_in">
               Sign In
             </a>
           </li>

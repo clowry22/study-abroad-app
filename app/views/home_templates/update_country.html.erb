@@ -2,7 +2,7 @@
 
 <%@selected_country = nil%>
 
-<form action="/home<%=@selected_country%>">
+<form action="/home/<%=@selected_country%>">
   <label for="get_country">Choose a country</label>
     <select name="country" id="get_country">
       <%@array_of_countries.each do |country|%>

@@ -45,8 +45,7 @@
   </thead>
 
   <tbody>
-  <!--make an each loop -->
-  <!--show the records where country == @the_country.name -->
+
   <%Phrase.where({:country => @the_country.name}).each do |phrase|%>
     <tr>
       <th scope="row"><%=phrase.id%></th>
