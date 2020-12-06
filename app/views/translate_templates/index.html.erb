@@ -45,8 +45,9 @@
   </thead>
 
   <tbody>
+  <%user_id = User.where({:username => session.fetch(:user_name)}).first.id%>
 
-  <%Phrase.where({:country => @the_country.name}).each do |phrase|%>
+  <%Phrase.where({:country => @the_country.name, :userid => user_id}).each do |phrase|%>
     <tr>
       <th scope="row"><%=phrase.id%></th>
       <td><%=phrase.original_language%> </td>

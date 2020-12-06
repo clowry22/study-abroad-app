@@ -1,7 +1,7 @@
 <h2>My virtual passport </h2>
 <br>
 
-<table class="table table-striped table-bordered"> <!--Figure out how to make the table striped. Bootstrap not recognizing odd or even rows -->
+<table class="table table-striped table-bordered"> 
   <thead class="thead-light">
     <tr>
       <th scope="col">Country Code</th>
@@ -13,7 +13,9 @@
 
 
   <tbody>
-  <%Country.all.each do |country|%>
+
+  <%user_id = User.where({:username => session.fetch(:user_name)}).first.id%>
+  <%Country.where({ :userid => user_id}).each do |country|%>
     <tr>
       <th scope="row"><%=country.country_code%></th>
       <td><%=country.name%> </td>
@@ -25,5 +27,3 @@
   </tbody>
 
 </table>
-
-<%#create an a href tag that saves the most recent country from cookies%>

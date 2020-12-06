@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  countries       :string
 #  password_digest :string
 #  username        :string
 #  created_at      :datetime         not null

@@ -8,6 +8,7 @@
 #  original_phrase     :string
 #  translated_language :string
 #  translated_phrase   :string
+#  userid              :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #

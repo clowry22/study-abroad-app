@@ -12,6 +12,7 @@
 #  population   :integer
 #  region       :string
 #  subregion    :string
+#  userid       :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

@@ -24,6 +24,7 @@ class CountryController < ApplicationController
         @the_country.country_code = @parsed_data.at(0).fetch("alpha2Code")
         @the_country.currencies = @parsed_data.at(0).fetch("currencies")
         @the_country.population = @parsed_data.at(0).fetch("population")
+        @the_country.userid = User.where({:username => session.fetch(:user_name)}).first.id
         @the_country.save 
         
       end 

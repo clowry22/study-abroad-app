@@ -17,6 +17,7 @@
         <%@the_phrase.translated_phrase = @translation%>
         <%@the_phrase.translated_language = @new_language%>
         <%@the_phrase.country = @the_country%>
+        <%@the_phrase.userid = User.where({:username => session.fetch(:user_name)}).first.id%>
         <%@the_phrase.save %>
     <%end %>
 
