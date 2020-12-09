@@ -46,7 +46,7 @@ class CountryController < ApplicationController
 
   def update_country
     the_country = params.fetch("country").downcase()
-    session.store(:most_recent_country, @country)
+    cookies.store(:most_recent_country, @country)
     redirect_to("/home/#{the_country}")
   end
 

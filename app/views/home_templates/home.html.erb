@@ -1,4 +1,4 @@
-
+<%if cookies.fetch(:most_recent_country) == nil%>
   <h1>Which country are you in? </h1>
 
 
@@ -12,6 +12,9 @@
   <%end%> 
 
   </ul>
-
-
+<%else%>
+  <%@country = cookies.fetch(:most_recent_country)%>
+ 
+  <a href="/home/<%=@country%>">Load Home </a>
+<%end%>
 
