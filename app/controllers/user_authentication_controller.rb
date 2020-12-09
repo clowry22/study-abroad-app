@@ -1,7 +1,7 @@
 class UserAuthenticationController < ApplicationController
   before_action(:force_user_sign_in)
-  skip_before_action( :force_user_sign_in, { :only => [ :new_signup_form, :create_user, :signin_form, 
-  :create_cookie, :delete_cookies, :authenticate]})
+  #skip_before_action( :force_user_sign_in, { :only => [ :new_signup_form, :create_user, :signin_form, 
+  #:create_cookie, :delete_cookies, :authenticate]})
   #users
   def authenticate
     un = params.fetch("input_username")
@@ -15,7 +15,7 @@ class UserAuthenticationController < ApplicationController
     
       if user.authenticate(pw)
         session.store(:user_name, user.username)
-        current_country = cookies.fetch(:most_recent_country) 
+        current_country = session[:most_recent_country] 
         if current_country == nil 
           redirect_to("/")
         else

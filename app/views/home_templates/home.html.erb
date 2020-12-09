@@ -1,4 +1,4 @@
-<%if session.fetch(:most_recent_country) == nil%>
+
   <h1>Which country are you in? </h1>
 
 
@@ -13,8 +13,5 @@
 
   </ul>
 
-<% else %>
-  <%redirect_to("/home/:country")%>
 
-<%end%>
 
